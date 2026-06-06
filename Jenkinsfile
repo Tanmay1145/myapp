@@ -17,14 +17,14 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t myapp:latest .'
+                bat 'docker build -t myapp:latest .'
             }
         }
 
         stage('Run') {
             steps {
-                sh 'docker rm -f myapp_container || true'
-                sh 'docker run -d -p 8095:80 --name myapp_container myapp:latest'
+                bat 'docker rm -f myapp_container || exit 0'
+                bat 'docker run -d -p 8095:80 --name myapp_container myapp:latest'
             }
         }
     }
